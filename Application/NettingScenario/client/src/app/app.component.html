@@ -1,0 +1,68 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons" />
+<div style="text-align:center">
+  <h1>
+    {{ title }}
+  </h1>
+</div>
+
+<mat-card style="margin:2em;padding-top:0;padding-left:0;padding-right:0" class="example-card">
+  <mat-card-title style="background:rgba(0,0,0,.06); padding:10px 10px;">Get Company Balance</mat-card-title>
+  <mat-card-content style="padding:1em;">
+    <div class="row">
+      <div class="col-md-6">
+        <mat-form-field class="example-form-field" style="width: 90%;padding-left: 5%">
+          <input matInput type="text" placeholder="Company Name" name="companyName" [(ngModel)]="companyName" (input)="disableError($event)">
+        </mat-form-field>
+        <div class="example-form-field error-help" *ngIf="!isCompanyNamePresent">Company Name is Required</div>
+      </div>
+
+      <div class="col-md-6">
+        <mat-form-field class="example-form-field" style="width: 90%;padding-left: 5%">
+          <input [disabled]="true" matInput type="text" name="companyBalance" [(ngModel)]="companyBalance" placeholder="Balance will be auto-populated">
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12" style="padding-left: 2.5%">
+        <button mat-raised-button type="submit" (click)="getBalance()">Submit</button>
+        <button mat-raised-button type="submit" name="clearGetBalance" (click)="resetFields($event)" style="margin-left: 2%">Clear</button>
+      </div>
+    </div>
+    
+  </mat-card-content>
+</mat-card>
+
+
+<mat-card style="margin:2em;padding-top:0;padding-left:0;padding-right:0" class="example-card">
+  <mat-card-title style="background:rgba(0,0,0,.06); padding:10px 10px;">Transfer Balance</mat-card-title>
+  <mat-card-content style="padding:1em;">
+    <div class="row">
+      <div class="col-md-4">
+        <mat-form-field class="example-form-field" style="width: 90%;padding-left: 5%">
+          <input matInput type="text" placeholder="From Company Name" name="fromCompanyName" [(ngModel)]="fromCompanyName" (input)="disableError($event)">
+        </mat-form-field>
+        <div class="example-form-field error-help" *ngIf="!isFromCompanyNamePresent">From Company Name is Required</div>
+      </div>
+
+      <div class="col-md-4">
+        <mat-form-field class="example-form-field" style="width: 90%;padding-left: 5%">
+          <input matInput type="text" placeholder="To Company Name" name="toCompanyName" [(ngModel)]="toCompanyName" (input)="disableError($event)">
+        </mat-form-field>
+        <div class="example-form-field error-help" *ngIf="!isToCompanyNamePresent">To Company Name is Required</div>
+      </div>
+
+      <div class="col-md-4">
+        <mat-form-field class="example-form-field" style="width: 90%;padding-left: 5%">
+          <input matInput type="number" placeholder="Amount to be transferred" name="amountToBeTransferred" [(ngModel)]="amountToBeTransferred" (input)="disableError($event)">
+        </mat-form-field>
+        <div class="example-form-field error-help" *ngIf="!isAmountPresent">Amount to be transferred is Required, range is >0 & <=1000 </div>
+      </div>
+    </div>
+    <div class="col-md-12" style="padding-left: 0.5%">
+      <button mat-raised-button type="submit" (click)="transferBalance()">Submit</button>
+      <button mat-raised-button type="submit" name="clearTransferBalance" (click)="resetFields($event)" style="margin-left: 2%">Clear</button>
+    </div>
+  </mat-card-content>
+</mat-card>
+<ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="large" color="#fff" type="ball-newton-cradle"></ngx-spinner>

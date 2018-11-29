@@ -1,0 +1,65 @@
+swagger: "2.0"
+
+info:
+  description: "Test Chaincode for Netting Scenario"
+  version: "1.0"
+  title: "Netting Scenario"
+
+consumes:
+  - application/x-www-form-urlencoded
+
+parameters:
+
+  companyName:
+    name: companyName
+    in: path
+    description: Name of a company
+    required: true
+    type: string
+    maxLength: 255
+
+  toCompanyName:
+    name: toCompanyName
+    in: formData
+    description: To
+    required: true
+    type: string
+    maxLength: 255
+
+  amountToBeTransferred:
+    name: amountToBeTransferred
+    in: formData
+    description: Amount to be transferred
+    required: true
+    type: string
+    maxLength: 5
+
+paths:
+
+  /{companyName}:
+
+    get:
+      operationId: fetchTotalAmount
+      summary: Read Amount by Company Name
+      parameters:
+      - $ref: '#/parameters/companyName'
+      produces:
+      - text/plain
+      responses:
+        200:
+          description: Amount fetched
+        500:
+          description: Failed      
+
+    post:
+      operationId: transfer
+      summary: Transfer Amount
+      parameters:
+      - $ref: '#/parameters/companyName'
+      - $ref: '#/parameters/toCompanyName'
+      - $ref: '#/parameters/amountToBeTransferred'
+      responses:
+        200:
+          description: Amount Transferred
+        500:
+          description: Failed
